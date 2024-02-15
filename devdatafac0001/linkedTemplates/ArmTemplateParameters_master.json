@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "devdatafac0001"
+		},
+		"ls_adlssa_accountKey": {
+			"value": ""
+		},
+		"ls_sa_connectionString": {
+			"value": ""
+		},
+		"ls_adlssa_properties_typeProperties_url": {
+			"value": "https://devadlssa0001.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
