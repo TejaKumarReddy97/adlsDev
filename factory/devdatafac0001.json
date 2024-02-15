@@ -1,0 +1,9 @@
+{
+	"name": "devdatafac0001",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "ab03f62c-e7e7-48ab-a8bd-8187022d0eef",
+		"tenantId": "616ae545-5db6-48ed-9651-732703b94552"
+	}
+}
