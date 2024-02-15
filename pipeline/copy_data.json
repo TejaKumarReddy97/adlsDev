@@ -55,7 +55,8 @@
 				}
 			},
 			{
-				"name": "file_IF_condition",
+				"name": "Failed_File_If_Condition",
+				"description": "Check for errors from the last Successful execution",
 				"type": "IfCondition",
 				"dependsOn": [
 					{
