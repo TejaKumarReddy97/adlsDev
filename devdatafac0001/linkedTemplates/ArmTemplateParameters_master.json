@@ -14,6 +14,9 @@
 		"ls_adlssa_properties_typeProperties_url": {
 			"value": "https://devadlssa0001.dfs.core.windows.net/"
 		},
+		"ls_http_git_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/"
+		},
 		"containerUri": {
 			"value": ""
 		},

@@ -19,6 +19,10 @@
 			"type": "string",
 			"defaultValue": "https://devadlssa0001.dfs.core.windows.net/"
 		},
+		"ls_http_git_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -54,6 +58,9 @@
 					},
 					"ls_adlssa_properties_typeProperties_url": {
 						"value": "[parameters('ls_adlssa_properties_typeProperties_url')]"
+					},
+					"ls_http_git_properties_typeProperties_url": {
+						"value": "[parameters('ls_http_git_properties_typeProperties_url')]"
 					}
 				}
 			},
