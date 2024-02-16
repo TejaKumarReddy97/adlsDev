@@ -1,0 +1,24 @@
+{
+	"name": "tr_schedule_http",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "copy_data_http_mapping",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 2,
+				"startTime": "2024-02-16T21:07:00",
+				"timeZone": "Central Standard Time"
+			}
+		}
+	}
+}
