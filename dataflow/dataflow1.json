@@ -19,6 +19,9 @@
 			"transformations": [
 				{
 					"name": "select1"
+				},
+				{
+					"name": "pivot1"
 				}
 			],
 			"scriptLines": [
@@ -40,11 +43,26 @@
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false) ~> source2",
 				"casesdeaths select(mapColumn(",
-				"          each(match(true()),",
-				"               'Cases_'+$$ = $$)",
+				"          country,",
+				"          country_code,",
+				"          continent,",
+				"          population,",
+				"          indicator,",
+				"          daily_count,",
+				"          date,",
+				"          source",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 pivot(groupBy(population,",
+				"          country,",
+				"          country_code,",
+				"          daily_count,",
+				"          source),",
+				"     pivotBy(indicator, ['Confirmed_cases', 'Deaths']),",
+				"     count = sum(daily_count),",
+				"     columnNaming: '$V-$N',",
+				"     lateral: true) ~> pivot1"
 			]
 		}
 	}
