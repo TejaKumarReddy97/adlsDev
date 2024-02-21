@@ -49,7 +49,7 @@
 				"          population,",
 				"          indicator,",
 				"          daily_count,",
-				"          date,",
+				"          reported_date = date,",
 				"          source",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
