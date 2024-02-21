@@ -12,6 +12,10 @@
 					"name": "casesdeaths"
 				},
 				{
+					"dataset": {
+						"referenceName": "ds_lookup",
+						"type": "DatasetReference"
+					},
 					"name": "source2"
 				}
 			],
@@ -22,6 +26,9 @@
 				},
 				{
 					"name": "pivot1"
+				},
+				{
+					"name": "filter1"
 				}
 			],
 			"scriptLines": [
@@ -40,9 +47,18 @@
 				"     validateSchema: false,",
 				"     limit: 100,",
 				"     ignoreNoFilesFound: false) ~> casesdeaths",
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> source2",
-				"casesdeaths select(mapColumn(",
+				"source(output(",
+				"          country as string,",
+				"          country_code_2_digit as string,",
+				"          country_code_3_digit as string,",
+				"          continent as string,",
+				"          population as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     limit: 100,",
+				"     ignoreNoFilesFound: false) ~> source2",
+				"filter1 select(mapColumn(",
 				"          country,",
 				"          country_code,",
 				"          continent,",
@@ -62,7 +78,8 @@
 				"     pivotBy(indicator, ['Confirmed_cases', 'Deaths']),",
 				"     count = sum(daily_count),",
 				"     columnNaming: '$V-$N',",
-				"     lateral: true) ~> pivot1"
+				"     lateral: true) ~> pivot1",
+				"casesdeaths filter(continent == 'Europe' && not(isNull(country_code))) ~> filter1"
 			]
 		}
 	}
