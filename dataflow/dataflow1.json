@@ -29,6 +29,12 @@
 				},
 				{
 					"name": "filter1"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select2"
 				}
 			],
 			"scriptLines": [
@@ -79,7 +85,26 @@
 				"     count = sum(daily_count),",
 				"     columnNaming: '$V-$N',",
 				"     lateral: true) ~> pivot1",
-				"casesdeaths filter(continent == 'Europe' && not(isNull(country_code))) ~> filter1"
+				"casesdeaths filter(continent == 'Europe' && not(isNull(country_code))) ~> filter1",
+				"pivot1, source2 join(pivot1@country == source2@country,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          population = pivot1@population,",
+				"          country = pivot1@country,",
+				"          country_code,",
+				"          daily_count,",
+				"          {Confirmed_cases-count},",
+				"          {Deaths-count},",
+				"          country_code_2_digit,",
+				"          country_code_3_digit,",
+				"          continent,",
+				"          population = source2@population",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2"
 			]
 		}
 	}
