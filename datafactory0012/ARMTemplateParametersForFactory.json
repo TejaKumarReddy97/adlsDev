@@ -7,6 +7,9 @@
 		},
 		"ls_sa_connectionString": {
 			"value": ""
+		},
+		"ls_kv_01_properties_typeProperties_baseUrl": {
+			"value": "https://kv-new-01.vault.azure.net/"
 		}
 	}
 }

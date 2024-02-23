@@ -10,6 +10,10 @@
 		"ls_sa_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_sa'"
+		},
+		"ls_kv_01_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kv-new-01.vault.azure.net/"
 		}
 	},
 	"variables": {
@@ -53,35 +57,17 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/tr_tumb')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
+			"name": "[concat(parameters('factoryName'), '/ls_kv_01')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "tr_wait",
-						"type": "PipelineReference"
-					},
-					"parameters": {}
-				},
-				"type": "TumblingWindowTrigger",
+				"type": "AzureKeyVault",
 				"typeProperties": {
-					"frequency": "Minute",
-					"interval": 5,
-					"startTime": "2024-02-22T09:14:00Z",
-					"delay": "00:00:00",
-					"maxConcurrency": 50,
-					"retryPolicy": {
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
+					"baseUrl": "[parameters('ls_kv_01_properties_typeProperties_baseUrl')]"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/tr_wait')]"
-			]
+			"dependsOn": []
 		}
 	]
 }

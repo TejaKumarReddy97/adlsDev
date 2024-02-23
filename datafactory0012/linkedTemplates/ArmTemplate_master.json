@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_sa'"
 		},
+		"ls_kv_01_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kv-new-01.vault.azure.net/"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -40,6 +44,9 @@
 					},
 					"ls_sa_connectionString": {
 						"value": "[parameters('ls_sa_connectionString')]"
+					},
+					"ls_kv_01_properties_typeProperties_baseUrl": {
+						"value": "[parameters('ls_kv_01_properties_typeProperties_baseUrl')]"
 					}
 				}
 			},
