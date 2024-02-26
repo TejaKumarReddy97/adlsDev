@@ -5,6 +5,11 @@
 			"referenceName": "ls_http",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"relativePath": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "HTTP"
 		},

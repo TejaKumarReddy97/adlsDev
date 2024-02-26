@@ -5,6 +5,14 @@
 			"referenceName": "ls_adls_gen2",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"fileName": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "HTTP"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
