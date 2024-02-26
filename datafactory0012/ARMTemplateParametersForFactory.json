@@ -5,7 +5,16 @@
 		"factoryName": {
 			"value": "datafactory0012"
 		},
+		"ls_adls_gen2_accountKey": {
+			"value": ""
+		},
 		"ls_sa_connectionString": {
+			"value": ""
+		},
+		"ls_adls_gen2_properties_typeProperties_url": {
+			"value": "https://devstradls.dfs.core.windows.net/"
+		},
+		"ls_adls_gen2_kv_sasUri": {
 			"value": ""
 		},
 		"ls_kv_01_properties_typeProperties_baseUrl": {
