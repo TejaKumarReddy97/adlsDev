@@ -17,6 +17,9 @@
 		"ls_adls_gen2_kv_sasUri": {
 			"value": ""
 		},
+		"ls_http_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/"
+		},
 		"ls_kv_01_properties_typeProperties_baseUrl": {
 			"value": "https://kv-new-01.vault.azure.net/"
 		}
