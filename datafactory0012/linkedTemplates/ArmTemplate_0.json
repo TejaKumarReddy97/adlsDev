@@ -30,6 +30,10 @@
 		"ls_kv_01_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kv-new-01.vault.azure.net/"
+		},
+		"ls_dbr_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0227-033829-7ym61qel"
 		}
 	},
 	"variables": {
@@ -183,7 +187,10 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "coviddeaths.csv",
+						"fileName": {
+							"value": "@dataset().fileName",
+							"type": "Expression"
+						},
 						"fileSystem": "raw"
 					},
 					"columnDelimiter": ",",
@@ -219,9 +226,12 @@
 				"typeProperties": {
 					"location": {
 						"type": "HttpServerLocation",
-						"relativeUrl": "TejaKumarReddy97/adlsDev/main/coviddeaths.csv"
+						"relativeUrl": {
+							"value": "@dataset().relativePath",
+							"type": "Expression"
+						}
 					},
-					"columnDelimiter": "\t",
+					"columnDelimiter": ",",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
@@ -286,6 +296,30 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/ls_sa')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_dbr')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-5305321819230343.3.azuredatabricks.net",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ls_kv_01",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "dbr-kv-token"
+					},
+					"existingClusterId": "[parameters('ls_dbr_properties_typeProperties_existingClusterId')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_kv_01')]"
 			]
 		},
 		{
@@ -440,7 +474,7 @@
 								"value": "@activity('Lookup1').output.value",
 								"type": "Expression"
 							},
-							"batchCount": 2,
+							"isSequential": true,
 							"activities": [
 								{
 									"name": "Copy data1",
@@ -504,7 +538,7 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"fileName": {
-													"value": "@item().fileName",
+													"value": "@item().FileName",
 													"type": "Expression"
 												}
 											}
@@ -683,6 +717,42 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_sa')]",
 				"[concat(variables('factoryId'), '/datasets/ds_adls')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_dbr_notebook')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Notebook1",
+						"type": "DatabricksNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/tryempada@eiu.edu/Notebook"
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_dbr",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_dbr')]"
 			]
 		}
 	]

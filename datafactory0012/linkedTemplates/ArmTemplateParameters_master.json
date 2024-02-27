@@ -17,6 +17,9 @@
 		"ls_adls_gen2_kv_sasUri": {
 			"value": ""
 		},
+		"ls_dbr_properties_typeProperties_existingClusterId": {
+			"value": "0227-033829-7ym61qel"
+		},
 		"ls_http_properties_typeProperties_url": {
 			"value": "https://raw.githubusercontent.com/"
 		},
