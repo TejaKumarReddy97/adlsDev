@@ -18,9 +18,12 @@
 		"typeProperties": {
 			"location": {
 				"type": "HttpServerLocation",
-				"relativeUrl": "TejaKumarReddy97/adlsDev/Dev/"
+				"relativeUrl": {
+					"value": "@dataset().relativePath",
+					"type": "Expression"
+				}
 			},
-			"columnDelimiter": "\t",
+			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
