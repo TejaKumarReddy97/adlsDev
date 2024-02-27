@@ -18,7 +18,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "HttpServerLocation",
-				"relativeUrl": "TejaKumarReddy97/adlsDev/main/coviddeaths.csv"
+				"relativeUrl": "TejaKumarReddy97/adlsDev/Dev/"
 			},
 			"columnDelimiter": "\t",
 			"escapeChar": "\\",
