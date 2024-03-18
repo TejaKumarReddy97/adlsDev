@@ -1,0 +1,9 @@
+{
+	"name": "datafac003",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "a2f9a28b-87d7-4190-87f9-5c7ec353a457",
+		"tenantId": "616ae545-5db6-48ed-9651-732703b94552"
+	}
+}
